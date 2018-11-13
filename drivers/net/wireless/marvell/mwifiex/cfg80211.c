@@ -3399,7 +3399,7 @@ static int mwifiex_cfg80211_suspend(struct wiphy *wiphy,
 	int i, ret = 0, retry_num = 10;
 	struct mwifiex_private *priv;
 	struct mwifiex_private *sta_priv =
-			mwifiex_get_priv(adapter, MWIFIEX_BSS_ROLE_STA);
+			mwifiex_get_priv(adapter, MWIFIEX_BSS_ROLE_ANY);
 
 	sta_priv->scan_aborting = true;
 	for (i = 0; i < adapter->priv_num; i++) {
@@ -3490,7 +3490,7 @@ static int mwifiex_cfg80211_resume(struct wiphy *wiphy)
 	if (!wiphy->wowlan_config)
 		goto done;
 
-	priv = mwifiex_get_priv(adapter, MWIFIEX_BSS_ROLE_STA);
+	priv = mwifiex_get_priv(adapter, MWIFIEX_BSS_ROLE_ANY);
 	mwifiex_get_wakeup_reason(priv, HostCmd_ACT_GEN_GET, MWIFIEX_SYNC_CMD,
 				  &wakeup_reason);
 	memset(&wakeup_report, 0, sizeof(struct cfg80211_wowlan_wakeup));
